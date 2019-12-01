@@ -55,6 +55,7 @@ fromEvent(button, "click").subscribe(event => {
 });
 */
 
+/*
 //OBSERVER OBJECT(subscribing with on Observer)
 let myObserver = {
   next: value => console.log(`Value produced: ${value}`),
@@ -64,3 +65,32 @@ let myObserver = {
 
 let sourceObservable$ = of("String", 10, true, allReaders[0].name);
 sourceObservable$.subscribe(myObserver);
+*/
+
+/*
+//OBSERVER CALLBACKS(subscribing with on callback)
+let sourceObservable$ = of("String", 10, true, allReaders[0].name);
+
+sourceObservable$.subscribe(
+  value => console.log(`Value produced: ${value}`),
+  err => console.log(`ERROR: ${err}`),
+  () => console.log(`All done producing values.`)
+);
+*/
+
+/*
+//CREATING AND USING OBSERVERS
+//#region subscribing to observables width OBSERVERS
+let books$ = from(allBooks);
+
+let booksObserver = {
+  next: book => console.log(`Value produced: ${book.title}`),
+  error: err => console.log(`ERROR: ${err}`),
+  complete: () => console.log(`All done producing values.`)
+};
+
+books$.subscribe(booksObserver);
+
+//#endregion
+*/
+
