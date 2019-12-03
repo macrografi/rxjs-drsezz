@@ -1,5 +1,5 @@
-import { of, from, fromEvent, concat } from "rxjs";
-import { map } from "rxjs/operators";
+import { of, from, fromEvent, concat, throwError } from "rxjs";
+import { map, filter, mergeMap, tap, catchError } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { allBooks, allReaders } from "./data";
 import { ajax } from "rxjs/ajax";
@@ -94,3 +94,89 @@ books$.subscribe(booksObserver);
 //#endregion
 */
 
+/*
+//MANUALY APPLYING AN OPERATOR
+let source$ = of(1, 2, 3, 4, 5);
+let doubler = map(value => value * 2);
+let doubled$ = doubler(source$);
+
+doubled$.subscribe(value => console.log(value));
+
+//CHANING OPERATORS
+let source2$ = of(1, 2, 3, 4, 5);
+
+source$
+  .pipe(
+    map(value => value * 2),
+    filter(mappedValue => mappedValue > 5)
+  )
+  .subscribe(finalValue => console.log(finalValue));
+*/
+
+//CATEGORIES OF OPERATORS
+//Transformation
+//Filtering
+//Combination
+//Utility
+//Conditional
+//Aggregate
+//Multicasting
+/*
+ajax({
+  url: "https://jsonplaceholder.typicode.com/users",
+  method: "GET",
+  responseType: "json"
+})
+  .pipe(
+    mergeMap(ajaxResponse => ajaxResponse.response),
+    filter(filterId => filterId.id > 3),
+    tap(oldId => console.log(`tap id: ${oldId.id}`))
+  )
+  .subscribe(finalValue => console.log(finalValue));
+*/
+
+//HANDING ERRORS
+/*
+ajax({
+  url: "/errors/500",
+  method: "GET",
+  responseType: "json"
+})
+  .pipe(
+    mergeMap(ajaxResponse => ajaxResponse.response),
+    filter(filterId => filterId.id > 3),
+    tap(oldId => console.log(`tap id: ${oldId.id}`)),
+    //catchError(err => of({ title: "AA", author: "BB" })),
+    //catchError((err, caught) => caught),
+    // catchError(err => {
+    //   throw `Something bad happened - ${err.message}`;
+    // })
+    //catchError(err => {return throwError(err.message)})
+  )
+  .subscribe(
+    finalValue => console.log(`VALUE: ${finalValue.id}`),
+    error => console.log(`ERROR: ${error}`)
+  );
+*/
+
+//STRUCTURE OF AN OPERATOR
+//Operator sutructure
+/*
+function myOperator(config1, config2){
+  return function(source$){
+    return newObservable$;
+  }
+}
+*/
+
+//manualy aplying an operators
+/*
+let source$ = of(1, 2, 3, 4, 5);
+let doubler = map(value => value * 2);
+let doubled$ = doubler(source$);
+doubled$.subscribe(
+  value => console.log(value)
+)
+*/
+//creating an operator
+let source$ = of(1, 2, 3, 4, 5);
