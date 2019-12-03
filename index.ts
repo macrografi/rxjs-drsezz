@@ -179,4 +179,14 @@ doubled$.subscribe(
 )
 */
 //creating an operator
+/*
 let source$ = of(1, 2, 3, 4, 5);
+
+function doublerOperator() {
+  return map(value => value * 2);
+}
+
+source$
+  .pipe(doublerOperator())
+  .subscribe(finalValue => console.log(finalValue));
+*/
