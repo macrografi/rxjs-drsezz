@@ -1,5 +1,25 @@
-import { of, from, fromEvent, concat, throwError } from "rxjs";
-import { map, filter, mergeMap, tap, catchError } from "rxjs/operators";
+import {
+  of,
+  from,
+  fromEvent,
+  concat,
+  throwError,
+  Subject,
+  interval
+} from "rxjs";
+import {
+  map,
+  filter,
+  mergeMap,
+  tap,
+  catchError,
+  take,
+  takeUntil,
+  multicast,
+  refCount,
+  publish,
+  share
+} from "rxjs/operators";
 import { Observable } from "rxjs";
 import { allBooks, allReaders } from "./data";
 import { ajax } from "rxjs/ajax";
@@ -189,4 +209,19 @@ function doublerOperator() {
 source$
   .pipe(doublerOperator())
   .subscribe(finalValue => console.log(finalValue));
+*/
+
+//MULTICASTED OBSERVABLES
+/*
+let subject$ = new Subject();
+
+subject$.subscribe(value => console.log(`Observer 1 :${value}`));
+subject$.subscribe(value => console.log(`Observer 2 :${value}`));
+
+subject$.next("Hello");
+
+let source$ = new Observable(subscriber => {
+  subscriber.next("Greetings!");
+});
+source$.subscribe(subject$);
 */
